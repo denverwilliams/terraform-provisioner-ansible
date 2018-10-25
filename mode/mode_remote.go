@@ -28,13 +28,13 @@ if [ -z "$(which ansible-playbook)" ]; then
   
   # only check the cloud boot finished if the directory exists
   if [ -d /var/lib/cloud/instance ]; then
-    until [[ -f /var/lib/cloud/instance/boot-finished ]]; do
+    until [ -f /var/lib/cloud/instance/boot-finished ]; do
       sleep 1
     done
   fi
 
   # install dependencies
-  if [[ -f /etc/redhat-release ]]; then
+  if [ -f /etc/redhat-release ]; then
     yum update -y \
     && yum groupinstall -y "Development Tools" \
     && yum install -y python-devel
@@ -56,7 +56,7 @@ else
   expected_version="{{ .AnsibleVersion}}"
   installed_version=$(ansible-playbook --version | head -n1 | awk '{print $2}')
   installed_version="ansible==$installed_version"
-  if [[ "$expected_version" = *"=="* ]]; then
+  if [ "$expected_version" = *"=="* ]; then
     if [ "$expected_version" != "$installed_version" ]; then
       pip install $expected_version
     fi
