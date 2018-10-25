@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-set -euo pipefail
 base="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "${base}/env.sh"
 version=`go version | awk '{ print $3 }' | sed -e s/go//`
